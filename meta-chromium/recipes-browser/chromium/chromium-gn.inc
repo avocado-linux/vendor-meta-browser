@@ -325,6 +325,12 @@ GN_ARGS += ' \
         rust_target_triple_vendor_for_target="${TARGET_VENDOR}" \
 '
 
+# Adjust the expected stdlib rlib list to match the Rust version provided by OE.
+# Rust 1.80+ removed unicode_width from the stdlib rlibs, and added
+# sysroot, c, and rustc_literal_escaper.
+GN_ARGS += 'removed_rust_stdlib_libs=["unicode_width"]'
+GN_ARGS += 'added_rust_stdlib_libs=["sysroot","c","rustc_literal_escaper"]'
+
 # This would require the Rust toolchain to use the same LLVM version as clang.
 GN_ARGS += 'toolchain_supports_rust_thin_lto=false'
 
